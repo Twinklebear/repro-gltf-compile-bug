@@ -1,12 +1,3 @@
-# find_package(Corrade REQUIRED Main Containers) find_package(Magnum REQUIRED GL
-# Shaders) find_package(MagnumIntegration REQUIRED ImGui)
-# find_package(MagnumPlugins REQUIRED StbTrueTypeFont GltfImporter)
-# find_package(Magnum REQUIRED EmscriptenApplication)
-
-# set(THREADS_PREFER_PTHREAD_FLAG ON) find_package(Threads REQUIRED)
-
-# corrade_add_resource(repro_resources ./resources.conf)
-
 add_executable(repro_lib repro_lib.cpp)
 target_link_libraries(repro_lib PUBLIC Magnum::EmscriptenApplication)
 

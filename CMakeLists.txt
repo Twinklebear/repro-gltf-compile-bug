@@ -19,12 +19,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/bin")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/lib")
 
-# Not sure if these will impact the bug
-#add_compile_options(-pthread)
-#add_link_options(-pthread)
-
-# Add Corrade as a subproject
-#set(CORRADE_BUILD_MULTITHREADED ${LCVIS_ENABLE_MULTITHREADING})
 add_subdirectory(corrade EXCLUDE_FROM_ALL)
 
 # Set targets GL versions before including magnum
@@ -35,7 +29,6 @@ set(MAGNUM_WITH_PRIMITIVES ON)
 set(MAGNUM_WITH_MAGNUMFONT ON)
 set(MAGNUM_BUILD_STATIC ON)
 set(MAGNUM_BUILD_PLUGINS_STATIC ON)
-#set(MAGNUM_BUILD_MULTITHREADED ${LCVIS_ENABLE_MULTITHREADING})
 
 set(MAGNUM_WITH_STBTRUETYPEFONT
     ON
