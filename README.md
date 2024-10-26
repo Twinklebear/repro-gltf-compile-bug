@@ -105,3 +105,17 @@ Then use `wasm2wat` to inspect the output on 3.1.64 and 3.1.65+:
 wasm2wat ./cmake-build/bin/repro_lib.wasm --generate-names --enable-all -o out.wat
 ```
 
+To find the failing code grep for
+```
+call $void_std::__2::__stable_sort<std::__2::_ClassicAlgPolicy__Magnum::Trade::GltfImporter::doMesh_unsigned_int__unsigned_int_::$_0&__Corrade::Containers::Triple<Corrade::Containers::BasicStringView<char_const>__unsigned_int__int>*>_Corrade::Containers::Triple<Corrade::Containers::BasicStringView<char_const>__unsigned_int__int>*__Corrade::Containers::Triple<Corrade::Containers::BasicStringView<char_const>__unsigned_int__int>*__Magnum::Trade::GltfImporter::doMesh_unsigned_int__unsigned_int_::$_0&__std::__2::iterator_traits<Corrade::Containers::Triple<Corrade::Containers::BasicStringView<char_const>__unsigned_int__int>*>::difference_type__std::__2::iterator_traits<Corrade::Containers::Triple<Corrade::Containers::BasicStringView<char_const>__unsigned_int__int>*>::value_type*__long_
+```
+and find the occurrance that is followed almost immediately by `call $operator_delete_void*_`
+and if you scroll down just a bit you should find a call:
+```
+call $Corrade::Containers::operator==_Corrade::Containers::BasicStringView<char_const>__Corrade::Containers::BasicStringView<char_const>_
+```
+
+Above this call to `operator==` are two `i64.load`, the second of which gets the bad offset
+on 3.1.65+
+
+
