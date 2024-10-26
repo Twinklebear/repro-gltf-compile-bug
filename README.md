@@ -1,4 +1,4 @@
-# Emscripten 3.1.66 Compile Bug Repro Case
+# Emscripten 3.1.65 Compile Bug Repro Case
 
 This repro case is for a compile bug that seems to have been introduced
 in Emscripten 3.1.66 when compiling [this lambda](https://github.com/mosra/magnum-plugins/blob/master/src/MagnumPlugins/GltfImporter/GltfImporter.cpp#L3349)
