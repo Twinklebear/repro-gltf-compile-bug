@@ -12,6 +12,6 @@ emcmake cmake .. \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DMAGNUM_WITH_EMSCRIPTENAPPLICATION=ON \
     -DCORRADE_RC_EXECUTABLE=../cmake-build-corrade/bin/corrade-rc
-make -j 8
+make -j 8 GltfImporter
 cd ..
 

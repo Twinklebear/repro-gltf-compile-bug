@@ -118,4 +118,15 @@ call $Corrade::Containers::operator==_Corrade::Containers::BasicStringView<char_
 Above this call to `operator==` are two `i64.load`, the second of which gets the bad offset
 on 3.1.65+
 
+You can also use the script `./check_gltf_importer.sh` to quickly check the GltfImporter.cpp.o file
+for this bad load offset. The script should be run from the build directory.
+ The script will grep for the bad line and print it if it exists, otherwise it prints nothing.
+
+
+# Bisecting with the Repro
+
+When bisecting with the repro you can build just the GltfImporter target in CMake to reduce
+the build time and use the `./check_gltf_importer.sh` to check if the bad offset is in the
+GltfImporter.cpp.o output file or not. The script will grep for the bad line and print it
+if it exists, otherwise it prints nothing.
 
