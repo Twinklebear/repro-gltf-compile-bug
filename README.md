@@ -91,8 +91,11 @@ end
 Cross-compiling w/ Magnum takes a small bit of setup so I've provided a
 build script, `build.sh` that will build the host utility `corrade-rc` and
 then build the WASM code. After running `build.sh` you can inspect the output
-under `cmake-build/bin/repro_lib.wasm` and translate it to wat with `wasm2wat`
-to see the good/bad output.
+of the bad file `magnum-plugins/src/MagnumPlugins/GltfImporter/CMakeFiles/GltfImporter.dir/GltfImporter.cpp.o`
+and translate it to wat with `wasm2wat`
+to see the good/bad output. This process of building and checking
+the file is wrapped in the `build.sh` and `check_gltf_importer.sh`
+scripts. First clone and build:
 
 ```bash
 git clone --recurse-submodules git@github.com:Twinklebear/repro-gltf-compile-bug.git
@@ -100,9 +103,19 @@ cd repro-gltf-compile-bug
 ./build.sh
 ```
 
-Then use `wasm2wat` to inspect the output on 3.1.64 and 3.1.65+:
+Then use `check_gltf_importer.sh` to check for the bad output:
+```
+./check_gltf_importer.sh
+```
+
+It will grep for the bad load offset `i64.load offset=4294967280`
+
+You can also use `wasm2wat` to inspect the output on 3.1.64 and 3.1.65+:
 ```bash
-wasm2wat ./cmake-build/bin/repro_lib.wasm --generate-names --enable-all -o out.wat
+wasm2wat ./cmake-build/magnum-plugins/src/MagnumPlugins/GltfImporter/CMakeFiles/GltfImporter.dir/GltfImporter.cpp.o \
+  --generate-names \
+  --enable-all \
+  -o out.wat
 ```
 
 To find the failing code grep for
