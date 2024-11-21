@@ -4,7 +4,7 @@ wat_file=gltfimporter.wat
 rm $wat_file
 
 wasm2wat \
-    magnum-plugins/src/MagnumPlugins/GltfImporter/CMakeFiles/GltfImporter.dir/GltfImporter.cpp.o \
+    ./cmake-build/magnum-plugins/src/MagnumPlugins/GltfImporter/CMakeFiles/GltfImporter.dir/GltfImporter.cpp.o \
     -o $wat_file \
     --enable-all \
     --generate-names
